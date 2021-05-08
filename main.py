@@ -85,9 +85,12 @@ class Register():
 
             else:
                 self.week = 0
-                for _ in range(2):
-                    self.leftbutt.click()
-                    time.sleep(5)
+                # for _ in range(2):
+                #     self.leftbutt.click()
+                #     time.sleep(5)
+                self.driver.get("https://www.cowin.gov.in/home")
+                time.sleep(5)
+                self.setparams()
             self.findslots()
 
 if __name__ == '__main__':
