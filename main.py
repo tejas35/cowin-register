@@ -109,3 +109,4 @@ if __name__ == '__main__':
 
     citizen = Register(pincode, age, type)
     citizen.setparams()
+    citizen.run()
