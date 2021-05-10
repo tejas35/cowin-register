@@ -17,4 +17,5 @@
 - [Step 6] It will search slots for next 3 weeks.
 - [Step 7] Script will be running contiuosly unitll it finds the slot.
 
-## This script will be updated soon so don't judge.
+## This script will be updated.
+## You may modify this on your own
