@@ -55,29 +55,31 @@ class Register():
         self.filterbypin()
         self.filtebyage()
         self.setkeys()
+
+    def run(self):
         self.findslots()
 
-
     def findslots(self):
-        self.finddates()
-        matmain = self.driver.find_element_by_class_name("mat-main-field.center-main-field")
-        rows = matmain.find_elements_by_class_name("row")
-        for row in rows:
-            if self.flag:
-                break
-            center_name = row.find_element_by_class_name("main-slider-wrap").text
-            slots = row.find_element_by_class_name("slot-available-wrap")
-            opts = slots.find_elements_by_class_name("slots-box")
-            print(center_name)
-            for date, opt in zip(self.dates, opts):
-                if opt.text != "NA":
-                    doses, type, age = opt.text.split("\n")
-                    if doses != "Booked" and age == self.age:
-                        print("date: "+ date + " doses: "+ doses + " type: " + type + " age: "+ age)
-                        self.notification()
-                        self.flag = True
-                        break
-        if self.flag == False:
+        while self.flag == False:
+            self.finddates()
+            matmain = self.driver.find_element_by_class_name("mat-main-field.center-main-field")
+            rows = matmain.find_elements_by_class_name("row")
+            for row in rows:
+                if self.flag:
+                    break
+                center_name = row.find_element_by_class_name("main-slider-wrap").text
+                slots = row.find_element_by_class_name("slot-available-wrap")
+                opts = slots.find_elements_by_class_name("slots-box")
+                print(center_name)
+                for date, opt in zip(self.dates, opts):
+                    if opt.text != "NA":
+                        doses, type, age = opt.text.split("\n")
+                        if doses != "Booked" and age == self.age:
+                            print("date: "+ date + " doses: "+ doses + " type: " + type + " age: "+ age)
+                            self.notification()
+                            self.flag = True
+                            break
+
             if self.week < 2:
                 self.week += 1
                 self.rightbutt.click()
@@ -91,7 +93,7 @@ class Register():
                 self.driver.get("https://www.cowin.gov.in/home")
                 time.sleep(5)
                 self.setparams()
-            self.findslots()
+
 
 if __name__ == '__main__':
     pincode = input("Please enter the pincode\n")
